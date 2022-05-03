@@ -21,12 +21,22 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll A,B,C,gcdN;
-//最大公約数を得たい。
+ll Q,t,x;
+vector<ll> a;
+//vectorを使う問題？
 
 int main() {
-    cin>>A>>B>>C;
-    gcdN = gcd(A,gcd(B,C));
-    cout<<A/gcdN+B/gcdN+C/gcdN-3<<endl;
+    cin>>Q;
+    rep(i,Q){
+        cin>>t>>x;
+        if(t==1){
+            a.insert(a.begin(),x);
+        }else if(t==2){
+            a.push_back(x);
+        }else if(t==3){
+            cout<<a[x-1]<<endl;
+        }
+
+    }
     return 0;
 }

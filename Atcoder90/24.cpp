@@ -21,12 +21,19 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll A,B,C,gcdN;
-//最大公約数を得たい。
+ll N,K,k=0;
+ll A[1005],B[1005];
+//偶数奇数の問題っぽい
+
 
 int main() {
-    cin>>A>>B>>C;
-    gcdN = gcd(A,gcd(B,C));
-    cout<<A/gcdN+B/gcdN+C/gcdN-3<<endl;
+    cin>>N>>K;
+    rep(i,N)cin>>A[i];
+    rep(i,N)cin>>B[i];
+    rep(i,N){
+        k += abs(A[i]-B[i]);
+    }
+    //cout<<sumN-K<<endl;
+    YesNo(K-k>=0 && (K-k)%2==0);
     return 0;
 }

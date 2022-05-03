@@ -21,12 +21,21 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll A,B,C,gcdN;
-//最大公約数を得たい。
+ll N,size=0;
+//mapを使った問題っぽい
+string tmp;
+map<string,ll> s;
 
 int main() {
-    cin>>A>>B>>C;
-    gcdN = gcd(A,gcd(B,C));
-    cout<<A/gcdN+B/gcdN+C/gcdN-3<<endl;
+    cin>>N;
+    rep(i,N){//day=1+i
+        cin>>tmp;
+        decltype(s)::iterator it = s.find(tmp);
+        if(it == s.end()){
+            cout<<1+i<<endl;
+            s.insert({tmp,0});
+        }
+    }
+
     return 0;
 }

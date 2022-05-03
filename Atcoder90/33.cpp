@@ -21,12 +21,14 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll A,B,C,gcdN;
-//最大公約数を得たい。
+ll H,W,Row;
 
 int main() {
-    cin>>A>>B>>C;
-    gcdN = gcd(A,gcd(B,C));
-    cout<<A/gcdN+B/gcdN+C/gcdN-3<<endl;
+    cin>>H>>W;
+    if(H==1 || W==1){
+        cout<<H*W<<endl;
+    }else{
+        cout<<(H/2+H%2)*(W/2+W%2)<<endl;
+    }
     return 0;
 }

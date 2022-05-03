@@ -21,12 +21,30 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll A,B,C,gcdN;
-//最大公約数を得たい。
+ll N,P,Q;
+ll A[1<<18];
+//何もわからん
 
 int main() {
-    cin>>A>>B>>C;
-    gcdN = gcd(A,gcd(B,C));
-    cout<<A/gcdN+B/gcdN+C/gcdN-3<<endl;
+    ll ans = 0; 
+    cin>>N>>P>>Q;
+    rep(i,N)cin>>A[i];
+    rep(i,N){
+        ll a1 = A[i];
+        reps(j,i+1,N){
+            ll a2 = A[j];
+            reps(k,j+1,N){
+                ll a3 = A[k];
+                reps(l,k+1,N){
+                    ll a4 = A[l];
+                    reps(m,l+1,N){
+                        ll a5 = A[m];
+                        if(a1*a2%P*a3%P*a4%P*a5%P == Q)ans++;
+                    }
+                }
+            }
+        }
+    }
+    cout<<ans<<endl;
     return 0;
 }
