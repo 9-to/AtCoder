@@ -21,28 +21,10 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll N;
-vector<ll>  A,B;
-//7を思い出す.今回は二分探索とは関係なく全体の総和を求める
+ll a,b,c;
+//a<=9*10^18    巨大な数なので型に注意
 
 int main() {
-    ll sumE=0;
-    cin>>N;
-    rep(i,N){
-        ll tmp;
-        cin>>tmp;
-        A.push_back(tmp);
-    }
-    rep(i,N){
-        ll tmp;
-        cin>>tmp;
-        B.push_back(tmp);
-    }
-    sort(all(A));
-    sort(all(B));
-    rep(i,N){
-        sumE += abs(A[i]-B[i]);
-    }
-    cout<<sumE<<endl;
+    cin>>a>>b>>c;
     return 0;
 }

@@ -21,28 +21,32 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll N;
-vector<ll>  A,B;
+long double L,T,X,Y,Q;
+long double E[1001];
+long double pi = M_PI;
 //7を思い出す.今回は二分探索とは関係なく全体の総和を求める
 
+long double calcZ(long double t){
+    long double omega = 2*pi/T;
+    return L/2-((L/2)*cos(omega*t));
+}
+long double calcY(long double t){
+    long double omega = 2*pi/T;
+    return -(L/2)*sin(omega*t);
+}
+
 int main() {
-    ll sumE=0;
-    cin>>N;
-    rep(i,N){
-        ll tmp;
-        cin>>tmp;
-        A.push_back(tmp);
+    cin>>T;
+    cin>>L>>X>>Y;
+    cin>>Q;
+    rep(i,Q){
+        cin>>E[i];
+        long double cy = calcY(E[i]);
+        long double cz = calcZ(E[i]);
+        long double x = sqrt(X*X+(Y-cy)*(Y-cy));
+        long double y = cz;
+        long double rad = atan2(y,x);
+        cout<< fixed << setprecision(12) <<180.0/pi*rad<<endl;
     }
-    rep(i,N){
-        ll tmp;
-        cin>>tmp;
-        B.push_back(tmp);
-    }
-    sort(all(A));
-    sort(all(B));
-    rep(i,N){
-        sumE += abs(A[i]-B[i]);
-    }
-    cout<<sumE<<endl;
     return 0;
 }
