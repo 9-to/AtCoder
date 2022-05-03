@@ -2,6 +2,7 @@
 [問題](https://atcoder.jp/contests/typical90/tasks)
 
 ★2:10題
+★3: 題
 
 ## 1. 羊羹切り分け
 最小値の最大化は二分探索が多いらしい。
@@ -87,3 +88,47 @@ rep(i,H){
 解けた✌️
 
 `queue`, `stack`, 双方向連結リストは頻出なので覚えておくこと
+
+## 67. 8進数を9進数にする
+**N進法展開**を理解する。
+
++ 8->10の展開で何かしらの誤りが発生した
++ `N=0`のコーナーケースを考えていなかった
+
+### 学んだこと
+#### char->int
+`数値 - '0'`これすぐ忘れる
+
+#### N進法の方法
+```C++
+ll base8_to_ll(string n){
+    ll ans=0,re=0,len = n.size();
+    for(int i = len-1;i>=0;i--){
+        ans += (n[i]-'0')*pow(8,re);
+        re++;
+    }
+    return ans;
+}
+```
+これだと何故かうまくいかないケースが発生するため下記のように書くと通った。
+```C++
+ll base8_to_ll(string n){
+    ll ans=0,len = n.size();
+    for(int i = 0;i<len;i++){
+        ans = ans * 8 + ll(n[i]-'0');
+    }
+    return ans;
+}
+```
+
+## 78. グラフ問題
+**グラフの基本**（グラフ使わなかったけど）
+
+解けた✌️
+
+### 学んだこと
+#### 隣接リストの作り方
+```C++
+vector<vector<int> > G(N);
+G[b].push_back(a);
+```
