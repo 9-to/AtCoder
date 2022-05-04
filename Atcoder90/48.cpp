@@ -21,11 +21,21 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll a,b,c;
-//a<=9*10^18    巨大な数なので型に注意
-
+ll N,K;
+vector<ll> S;
 int main() {
-    cin>>a>>b>>c;
-    YesNo(a<powl(c,b));
+    ll cnt=0;
+    cin>>N>>K;
+    rep(i,N){
+        ll a,b;
+        cin>>a>>b;
+        S.push_back(b);
+        S.push_back(a-b);
+    }
+    sort(all(S),greater<ll>{});
+    rep(i,K){
+       cnt += S[i];
+    }
+    cout<<cnt<<endl;
     return 0;
 }

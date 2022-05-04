@@ -21,11 +21,31 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll a,b,c;
-//a<=9*10^18    巨大な数なので型に注意
+ll N,Q;
+deque<ll> A;
 
 int main() {
-    cin>>a>>b>>c;
-    YesNo(a<powl(c,b));
+    cin>>N>>Q;
+    rep(i,N){
+        ll tmp;
+        cin>>tmp;
+        A.push_back(tmp);
+    }
+    rep(i,Q){
+        ll t,x,y;
+        cin>>t>>x>>y;
+        x--;y--;
+        if(t==1){
+            ll tmp = A[x];
+            A[x] = A[y];
+            A[y] = tmp;
+        }else if(t==2){
+            ll tmp = A[A.size()-1];
+            A.pop_back();
+            A.push_front(tmp);
+        }else if(t==3){
+            cout<<A[x]<<endl;
+        }
+    }
     return 0;
 }

@@ -21,11 +21,31 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll a,b,c;
-//a<=9*10^18    巨大な数なので型に注意
+ll A,B;
+string L = "Large";
+
+ll llsize(ll n){
+    ll cnt=0;
+    while(n!=0){
+        n/=10;
+        cnt++;
+    }
+    return cnt;
+}
 
 int main() {
-    cin>>a>>b>>c;
-    YesNo(a<powl(c,b));
+    cin>>A>>B;
+    if(B>A)swap(A,B);
+    ll bsize = llsize(B);
+    ll gcdN = gcd(A,B);
+    ll tmp = A/gcdN;
+    ll tmpsize = llsize(tmp);
+    if(tmpsize+bsize>19 && tmp*B!=1000000000000000000){
+        cout<<L<<endl;
+    }else{
+        ll sumN = tmp*B;
+        if(sumN>1000000000000000000)cout<<L<<endl;
+        else cout<<sumN<<endl;
+    }
     return 0;
 }

@@ -21,11 +21,39 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll a,b,c;
-//a<=9*10^18    巨大な数なので型に注意
+ll N;
+ll A[46]={0},B[46]={0},C[46]={0};
 
 int main() {
-    cin>>a>>b>>c;
-    YesNo(a<powl(c,b));
+    ll cnt=0;
+    cin>>N;
+    rep(i,N){
+        ll tmp;
+        cin>>tmp;
+        tmp %= 46;
+        A[tmp] += 1;
+    }
+    rep(i,N){
+        ll tmp;
+        cin>>tmp;
+        tmp %= 46;
+        B[tmp] += 1;
+    }
+    rep(i,N){
+        ll tmp;
+        cin>>tmp;
+        tmp %= 46;
+        C[tmp] += 1;
+    }
+    rep(a,46){
+        rep(b,46){
+            rep(c,46){
+                if((a+b+c)%46==0){
+                    cnt += A[a]*B[b]*C[c];
+                }
+            }
+        }
+    }
+    cout<<cnt<<endl;
     return 0;
 }
