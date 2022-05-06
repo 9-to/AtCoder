@@ -22,8 +22,48 @@ using ll = long long;
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
 ll N;
+#define N_MAX = 100000;
+ll d[100001];//最短距離
+ll ans =0;
+vector<ll> E[100001];
+//グラフ問題
+//最大の閉路を形成する
+//制約から連結している←これは関係なく、最も長い経路を考えたい
+ll calc(ll a){
+    rep(i,N+1)d[i] = -1;
+    ll maxD = 0,tmp;
+    queue<ll> q;
+    q.push(a);
+    d[a] = 0;
+    while(!q.empty()){
+        ll pos = q.front();
+        q.pop();
+        for(auto to:E[pos]){
+            if(d[to]== -1){
+                d[to] = d[pos]+1;
+                q.push(to);
+                if(d[to]>maxD){
+                    maxD = d[to];
+                    tmp = to;
+                }
+                //cout<<to<<"|"<<d[to]<<endl;
+            }
+        }
+    }
+    return tmp;
+}
 
 int main() {
     cin>>N;
+    rrep(i,N-1){
+        ll a,b;
+        cin>>a>>b;
+        E[a].push_back(b);
+        E[b].push_back(a);
+    }
+    ll tmp = calc(1LL);
+    //cout<<"maxdistV:"<<tmp<<endl;
+    tmp = calc(tmp);
+    cout<<d[tmp]+1<<endl;
     return 0;
 }
