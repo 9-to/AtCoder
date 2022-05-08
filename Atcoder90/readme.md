@@ -339,4 +339,35 @@ void calc(ll a){
 
 解説見ながら実装したので似たような問題をもう少し解きたい
 ## 12. 2次元平面を赤に塗る、赤色を伝って地点A->地点Bに移動できるか判定
+幅全探索だとO(QHW)=10^12でTLEとなる。
+**連結判定はUnion-find木**->計算量は(HW+Qα(HW))となる。
+#### Union-find
+実装が怠い。
+```C++
+class UnionFind {
+public:
+	vector<int> par;
 
+	void init(int sz) {
+		par.resize(sz, -1);
+	}
+	int root(int pos) {
+		if (par[pos] == -1) return pos;
+		par[pos] = root(par[pos]);
+		return par[pos];
+	}
+	void unite(int u, int v) {
+		u = root(u); v = root(v);
+		if (u == v) return;
+		par[u] = v;
+	}
+	bool same(int u, int v) {
+		if (root(u) == root(v)) return true;
+		return false;
+	}
+};
+```
+#### 二次元配列を木構造に取り込む
+`pair<ll,ll>`を使うよりハッシュ化した方が楽（`hash=(x-1)*X+(y-1);`）
+## 26. 木構造から隣接しないように頂点をN/2取り出す
+また木構造の問題。
