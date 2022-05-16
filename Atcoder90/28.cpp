@@ -22,42 +22,36 @@ using ll = long long;
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
 ll N;
-vector<ll> V[100002];//グラフ
-ll colors[100001];//{0,1}
-
-void dfs(ll pos, ll cur){//深さ優先探索
-    colors[pos] = cur;
-    for(auto i:V[pos]){
-        if(colors[i]==-1) dfs(i,1-cur);
-    }
-}
+ll lx[100000],ly[1000000],rx[100000],ry[100000];
+ll ans[1000000]={};//
+ll f[1003][1003]={};//field
 
 int main() {
     cin>>N;
-    rrep(i,N)colors[i]=-1;
-    rep(i,N-1){
-        ll a,b;
-        cin>>a>>b;
-        V[a].push_back(b);
-        V[b].push_back(a);
+    rep(i,N)cin>>lx[i]>>ly[i]>>rx[i]>>ry[i];
+    rep(i,N){
+        f[lx[i]][ly[i]] += 1;
+        f[rx[i]][ry[i]] += 1;
+        f[lx[i]][ry[i]] -= 1;
+        f[rx[i]][ly[i]] -= 1;
     }
-    dfs(1,1);
-    vector<ll> G1,G0;
-    rrep(i,N){
-        if(colors[i]==0)G0.push_back(i);
-        if(colors[i]==1)G1.push_back(i);
-    }
-    if(G1.size()>G0.size()){
-        rep(i,N/2){
-            if(i)cout<<" ";
-            cout<<G1[i];
-        }
-    }else{
-        rep(i,N/2){
-            if(i)cout<<" ";
-            cout<<G0[i];
+    rep(i,1001){//累積和をとる
+        rrep(j,1000){
+            f[i][j] += f[i][j-1];
         }
     }
-    cout<<endl;
+    rep(i,1001){//累積和をとる
+        rrep(j,1000){
+            f[j][i] += f[j-1][i];
+        }
+    }
+    rep(i,1001){
+        rep(j,1001){
+            if (f[i][j] >= 1) ans[f[i][j]] +=1;
+        }
+    }
+    
+    
+    rrep(i,N)cout<<ans[i]<<endl;
     return 0;
 }

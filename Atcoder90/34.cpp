@@ -21,43 +21,13 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll N;
-vector<ll> V[100002];//グラフ
-ll colors[100001];//{0,1}
-
-void dfs(ll pos, ll cur){//深さ優先探索
-    colors[pos] = cur;
-    for(auto i:V[pos]){
-        if(colors[i]==-1) dfs(i,1-cur);
-    }
-}
+ll N,K;
+ll a[10000001];
+//しゃくとり法っぽい
+ll maxlen = 0;
 
 int main() {
-    cin>>N;
-    rrep(i,N)colors[i]=-1;
-    rep(i,N-1){
-        ll a,b;
-        cin>>a>>b;
-        V[a].push_back(b);
-        V[b].push_back(a);
-    }
-    dfs(1,1);
-    vector<ll> G1,G0;
-    rrep(i,N){
-        if(colors[i]==0)G0.push_back(i);
-        if(colors[i]==1)G1.push_back(i);
-    }
-    if(G1.size()>G0.size()){
-        rep(i,N/2){
-            if(i)cout<<" ";
-            cout<<G1[i];
-        }
-    }else{
-        rep(i,N/2){
-            if(i)cout<<" ";
-            cout<<G0[i];
-        }
-    }
-    cout<<endl;
+    cin>>N>>K;
+    rep(i,N)cin>>a[i];
     return 0;
 }
