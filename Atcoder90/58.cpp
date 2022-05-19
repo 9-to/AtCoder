@@ -21,28 +21,14 @@ using ll = long long;
 #define repd(i,n) for(ll i=n-1;i>=0;i--)
 #define rrepd(i,n) for(ll i=n;i>=1;i--)
 
-ll N,K;
+ll K,N;
 ll a[1<<18];
-//しゃくとり法っぽい
-ll maxlen = 0;
-map<ll,ll> Map;
-
+ll Q = 100000;
+//9の倍数は各桁の和が9の倍数になる
+//格桁の合計はKになる
+//->9の倍数かつKになれば良い
 
 int main() {
     cin>>N>>K;
-    rrep(i,N)cin>>a[i];
-    ll r=1, cnt=0;
-    rrep(i,N){
-        while(r<=N){
-            if(Map[a[r]]==0 && cnt==K)break;//参照位置の出現数が0(新しい数字)、かつ、部分列出現が既にK種類
-            if(Map[a[r]]==0)cnt++;          //参照位置の出現数が0(新しい数字)
-            Map[a[r]] +=1;
-            r++;
-        }
-        maxlen = max(maxlen,r-i);
-        if(Map[a[i]]==1)cnt--;
-        Map[a[i]] -= 1;
-    }
-    cout<<maxlen<<endl;
     return 0;
 }
