@@ -24,11 +24,46 @@ using ll = long long;
 ll K,N;
 ll a[1<<18];
 ll Q = 100000;
-//9の倍数は各桁の和が9の倍数になる
-//格桁の合計はKになる
-//->9の倍数かつKになれば良い
+//K<10^18のため、O(K)だとTLEになる
+//巡回性を利用する？
+
+ll calc(ll n){
+    ll outp = 0;
+    ll tmp = n;
+    while(tmp>0){
+        outp += tmp % 10;
+        tmp /= 10;
+    }
+    return outp;
+}
+
 
 int main() {
     cin>>N>>K;
+    vector<ll> c,cp;
+    ll pos,ii;
+    rrep(i,K){
+        N = (N+calc(N))%Q;
+        if(N==0){
+            cout<<0<<endl;
+            return 0;
+        }
+        auto result = find(all(c),N);
+        if(result!=c.end()){
+            pos = distance(c.begin(),result);
+            //cout<<c.size()<<"|"<<pos<<endl;
+            ii = i;
+            copy(result,c.end(),back_inserter(cp));
+            break;
+        }
+        c.push_back(N);
+    }
+    if(cp.size()!=0){
+        K = (K-ii+1)%cp.size();
+        if(K!=0)cout<<cp[K-1]<<endl;
+        else cout<<cp[cp.size()-1]<<endl;
+    }else{
+        cout<<N<<endl;
+    }
     return 0;
 }
